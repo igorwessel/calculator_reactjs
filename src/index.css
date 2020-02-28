@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+}
+
+.Calculator {
+    width: 400px;
+    height: 400px;
+    margin: 50px auto;
+    background-color: rgb(117, 117, 117);
+}
+
+.Display {
+    position: relative;
+    top: 15px;
+    margin: 10px;
+    border-radius: 15px;
+    height: 100px;
+    background-color: aqua;
+}
