@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Display from './components/Display';
+import Buttons from './components/Buttons'
 import './index.css';
 
 class Calculator extends React.Component {
@@ -8,6 +9,7 @@ class Calculator extends React.Component {
         return (
             <div className='Calculator'>
                 <Display />
+                <Buttons />
             </div>
         );
     }
