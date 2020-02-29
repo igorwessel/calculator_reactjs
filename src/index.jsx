@@ -1,19 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Display from './components/Display';
-import Buttons from './components/Buttons'
+import Calculator from './components/Calculator'
 import './index.css';
-
-class Calculator extends React.Component {
-    render() {
-        return (
-            <div className='Calculator'>
-                <Display />
-                <Buttons />
-            </div>
-        );
-    }
-}
 
 
 ReactDOM.render(
