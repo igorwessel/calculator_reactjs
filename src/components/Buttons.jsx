@@ -24,7 +24,6 @@ export default class Buttons extends React.Component {
                 <button>+</button>
                 <button>-</button>
                 <button>÷</button>
-                {/* <button>x</button> */}
             </div>
         );
     }

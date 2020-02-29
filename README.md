@@ -1,1 +1,1 @@
-## Calcular in React_JS
+## Calculator in React_JS
