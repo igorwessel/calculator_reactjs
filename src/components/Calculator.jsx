@@ -17,16 +17,56 @@ export default class Calculator extends React.Component {
         this.clearMemory = this.clearMemory.bind(this)
         this.addDigit = this.addDigit.bind(this)
         this.setOperation = this.setOperation.bind(this)
+        this.clearDisplayValue = this.clearDisplayValue.bind(this)
     }
 
     clearMemory() {
         this.setState({ ...initialState })
     }
 
+    clearDisplayValue() {
+        this.setState({ displayValue: '0' })
+    }
+
     setOperation(operation) {
         const current = this.state.current
         if (current === 0) {
-            this.setState({ current: 1, clearDisplay: true })
+            this.setState({ operation, current: 1, clearDisplay: true })
+        } else {
+            const equals = operation === '='
+            const currentOperation = this.state.operation
+            const values = [...this.state.values]
+
+            switch (currentOperation) {
+                case '+':
+                    values[0] = values[0] + values[1]
+                    values[1] = 0
+                    break
+                case '-':
+                    values[0] = values[0] - values[1]
+                    values[1] = 0
+                    break
+                case '/':
+                    values[0] = values[0] / values[1]
+                    values[1] = 0
+                    break
+                case '%':
+                    values[0] = (values[0] / 100) * values[1]
+                    values[1] = 0
+                    break
+                case '*':
+                    values[0] = values[0] * values[1]
+                    values[1] = 0
+                    break
+            }
+
+            this.setState({
+                values,
+                operation: equals ? null : operation,
+                current: equals ? 0 : 1,
+                displayValue: values[0],
+                clearDisplay: !equals,
+            })
         }
     }
 
@@ -42,7 +82,7 @@ export default class Calculator extends React.Component {
             clearDisplay: false
         })
 
-        if (n !== '.') {
+        if (n !== '.' && n !== '%' && n !== '(' && n !== ')') {
             const index = this.state.current
             const newValue = parseFloat(displayValue)
             const values = [...this.state.values]
@@ -66,15 +106,14 @@ export default class Calculator extends React.Component {
                 <Button label='2' click={this.addDigit} />
                 <Button label='3' click={this.addDigit} />
                 <Button label='0' click={this.addDigit} />
-                <Button label='(' operation click={this.setOperation} />
-                <Button label=')' operation click={this.setOperation} />
+                <Button label='AC' operation click={this.clearMemory} />
                 <Button label='%' operation click={this.setOperation} />
                 <Button label='+' operation click={this.setOperation} />
                 <Button label='-' operation click={this.setOperation} />
                 <Button label='*' operation click={this.setOperation} />
                 <Button label='/' operation click={this.setOperation} />
-                <Button label='.' operation click={this.setOperation} />
-                <Button label='AC' operation click={this.clearMemory} />
+                <Button label='.' operation click={this.addDigit} />
+                <Button label='C' operation click={this.clearDisplayValue} />
                 <Button label='=' operation click={this.setOperation} />
             </div>
         );
