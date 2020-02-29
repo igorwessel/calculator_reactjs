@@ -39,19 +39,19 @@ export default class Calculator extends React.Component {
 
             switch (currentOperation) {
                 case '+':
-                    values[0] = values[0] + values[1]
+                    values[0] = parseFloat((values[0] + values[1]).toFixed(2))
                     values[1] = 0
                     break
                 case '-':
-                    values[0] = values[0] - values[1]
+                    values[0] = parseFloat((values[0] - values[1]).toFixed(2))
                     values[1] = 0
                     break
                 case '/':
-                    values[0] = values[0] / values[1]
+                    values[0] = parseFloat((values[0] / values[1]).toFixed(2))
                     values[1] = 0
                     break
                 case '%':
-                    values[0] = (values[0] / 100) * values[1]
+                    values[0] = parseFloat(((values[0] / 100) * values[1]).toFixed(2))
                     values[1] = 0
                     break
                 case '*':
@@ -64,7 +64,7 @@ export default class Calculator extends React.Component {
                 values,
                 operation: equals ? null : operation,
                 current: equals ? 0 : 1,
-                displayValue: values[0],
+                displayValue: values[0].toString(),
                 clearDisplay: !equals,
             })
         }
@@ -82,7 +82,7 @@ export default class Calculator extends React.Component {
             clearDisplay: false
         })
 
-        if (n !== '.' && n !== '%' && n !== '(' && n !== ')') {
+        if (n !== '.') {
             const index = this.state.current
             const newValue = parseFloat(displayValue)
             const values = [...this.state.values]
