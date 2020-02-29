@@ -1,10 +1,6 @@
 import React from 'react'
 
-export default class Display extends React.Component {
-    render() {
-        return (
-            <div className="Display">
-            </div>
-        );
-    }
-}
+export default props =>
+    <div className="display">
+        {props.value}
+    </div>
